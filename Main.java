@@ -7,6 +7,7 @@ public class Main{
 	public static void main(String[] args) {
 		Scanner scnr = new Scanner(System.in);
 		int numberOfCases = 0;
+
 		while(scnr.hasNext()){
 			numberOfCases++;
 			if (numberOfCases > 1){
@@ -48,9 +49,19 @@ public class Main{
 	}
 	private static void passwords(String [] dicWords, String pwSoFar, char [][] rules, int i, int j, HashSet<String> passwordSet){
 		passwordSet.add(pwSoFar);
-		
-		if (rules[i][j] == '#'){
 
+		if (rules[i][j] == '#'){
+			for (String s : dicWords){
+				passwords(dicWords, String.valueOf(rules[i][j]), rules, i, j, passwordSet);
+			}
+		}
+		else if (rules[i][j] == '0'){
+			for(int x = 0; x < 10; x++){
+				passwordSet.add(pwSoFar += x);
+			}
+		}
+		else{
+			continue
 		}
 	}
 }
